@@ -11,6 +11,7 @@ class FIFOCache(BaseCaching):
     """
     def __init__(self):
         super().__init__() # init parent class
+        self.key_indexes = []
 
     def put(self, key, item):
         """
@@ -23,11 +24,12 @@ class FIFOCache(BaseCaching):
             return
 
         if len(self.cache_data) >= self.MAX_ITEMS:
-            first_key = next(iter(self.cache_data)) # get first key
+            first_key = self.key_indexes.pop(0) # get first key
             print(f"DISCARD:{first_key}\n")  # pop first item
             del self.cache_data[first_key]  # remove first item
 
         self.cache_data[key] = item
+        self.key_indexes.append(key)
 
     def get(self, key):
         """
