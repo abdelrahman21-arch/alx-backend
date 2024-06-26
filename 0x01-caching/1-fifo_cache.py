@@ -22,7 +22,7 @@ class FIFOCache(BaseCaching):
         if key is None or item is None:
             return
 
-        if len(self.cache_data) > self.MAX_ITEMS:
+        if len(self.cache_data) >= self.MAX_ITEMS:
             first_key = next(iter(self.cache_data)) # get first key
             print(f"DISCARD:{first_key}\n")  # pop first item
             del self.cache_data[first_key]  # remove first item
