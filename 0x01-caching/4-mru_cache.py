@@ -11,7 +11,7 @@ class MRUCache(BaseCaching):
 
 
         - derived class of BaseCaching
-        - implements lru caching
+        - implements mru caching
     """
     def __init__(self):
         super().__init__() # init parent class
@@ -22,7 +22,7 @@ class MRUCache(BaseCaching):
 
         :param key:  key
         :param item: value
-        :return: new dict according to lru
+        :return: new dict according to mru
         """
         if key and item:
             if len(self.cache_data) >= self.MAX_ITEMS:
