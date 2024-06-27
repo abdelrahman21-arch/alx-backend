@@ -1,47 +1,33 @@
 #!/usr/bin/python3
-""" fifo class
-"""
+''' self descriptive code '''
 
-from base_caching import BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
+
 
 class FIFOCache(BaseCaching):
-    """
-        - derived class of BaseCaching
-        - implements fifo chaching
-    """
+    ''' self descriptive '''
+
     def __init__(self):
-        super().__init__() # init parent class
+        super().__init__()
         self.key_indexes = []
 
     def put(self, key, item):
-        """
+        ''' self descriptive '''
+        if key and item:
+            if key in self.cache_data:
+                self.cache_data[key] = item
+                return
 
-        :param key:  key
-        :param item: value
-        :return: new dict according to fifo
-        """
-        if key is None or item is None:
-            return
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                item_discarded = self.key_indexes.pop(0)
+                del self.cache_data[item_discarded]
+                print("DISCARD:", item_discarded)
 
-        if key in self.cache_data:
             self.cache_data[key] = item
-            return
-
-        if len(self.cache_data) >= self.MAX_ITEMS:
-            first_key = self.key_indexes.pop(0) # get first key
-            print(f"DISCARD:{first_key}\n")  # pop first item
-            del self.cache_data[first_key]  # remove first item
-
-        self.cache_data[key] = item
-        self.key_indexes.append(key)
+            self.key_indexes.append(key)
 
     def get(self, key):
-        """
-
-        :param key: key
-        :return: item
-        """
-        if key is None:
-            return None
-
-        return self.cache_data.get(key, None)
+        ''' self descriptive '''
+        if key in self.cache_data:
+            return self.cache_data[key]
+        return None
