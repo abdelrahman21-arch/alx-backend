@@ -22,9 +22,8 @@ class BasicCache(BaseCaching):
         :param item:  value
         :return: added dict
         """
-        if len(self.cache_data) >= self.MAX_ITEMS:
-            first_key = next(iter(self.cache_data)) # get first key
-            del self.cache_data[first_key]  # remove first item
+
+
         if key is None or item is None:
             return None
         self.cache_data[key] = item
