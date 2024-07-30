@@ -1,0 +1,17 @@
+// Import the redis client from the redis package
+import { createClient } from 'redis';
+
+console.log("Starting...");
+// Create a new Redis client
+const client = createClient();
+
+// Attach an event listener for the 'connect' event
+client.on('connect', () => {
+  console.log('Redis client connected to the server');
+});
+
+// Attach an event listener for the 'error' event
+client.on('error', (err) => {
+  console.log(`Redis client not connected to the server: ${err.message}`);
+});
+
