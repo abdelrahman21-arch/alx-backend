@@ -1,0 +1,10 @@
+502:C 31 Jul 00:30:28.064 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+502:C 31 Jul 00:30:28.064 # Redis version=4.0.9, bits=64, commit=00000000, modified=0, pid=502, just started
+502:C 31 Jul 00:30:28.064 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+502:M 31 Jul 00:30:28.065 * Running mode=standalone, port=6379.
+502:M 31 Jul 00:30:28.065 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+502:M 31 Jul 00:30:28.065 # Server initialized
+502:M 31 Jul 00:30:28.065 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+502:M 31 Jul 00:30:28.065 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+502:M 31 Jul 00:30:28.065 # Can't handle RDB format version 9
+502:M 31 Jul 00:30:28.065 # Fatal error loading the DB: Invalid argument. Exiting.
