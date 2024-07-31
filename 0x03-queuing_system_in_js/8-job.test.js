@@ -1,0 +1,47 @@
+const { expect } = require('chai');
+const kue = require('kue');
+const createPushNotificationsJobs = require('./8-job');
+
+describe('createPushNotificationsJobs', () => {
+    let queue;
+
+    before(() => {
+        queue = kue.createQueue();
+        kue.Job.rangeByType('push_notification_code_2', 'inactive', 0, 10, 'asc', function(err, jobs) {
+            jobs.forEach(function(job) {
+                job.remove();
+            });
+        });
+    });
+
+    beforeEach(() => {
+        queue.testMode.enter(); // Enter test mode
+    });
+
+    afterEach(() => {
+        queue.testMode.clear(); // Clear the queue after each test
+    });
+
+    after(() => {
+        queue.testMode.exit(); // Exit test mode
+    });
+
+   it('should create jobs for each item in the array', () => {
+    const jobs = [
+        { phoneNumber: '+1234567890', message: 'Hello, this is your notification!' },
+        { phoneNumber: '+0987654321', message: 'Reminder: Meeting at 10 AM!' },
+    ];
+         createPushNotificationsJobs(jobs, queue);
+
+    expect(queue.testMode.jobs.length).to.equal(2);
+    expect(queue.testMode.jobs[0].type).to.equal('push_notification_code_2');
+    expect(queue.testMode.jobs[0].data).to.deep.equal(jobs[0]);
+    expect(queue.testMode.jobs[1].type).to.equal('push_notification_code_2');
+    expect(queue.testMode.jobs[1].data).to.deep.equal(jobs[1]);
+   });
+
+    it('should throw an error if jobs is not an array', () => {
+    expect(() => createPushNotificationsJobs('invalid', queue)).to.throw(Error, 'Jobs is not an array');
+    });
+    
+});
